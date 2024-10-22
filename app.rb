@@ -19,11 +19,16 @@ get ("/square/results") do
   erb(:square_results)
 end
 
-get ("/random/results") do
-  @the_num = params.fetch("users_number").to_f
-  @the_result = @the_num ** 2
-  erb(:square_results)
+get ("/square_root/new") do 
+  erb(:new_square_root_calc)
 end
+
+get ("/square_root/results") do
+  @the_num = params.fetch("users_number").to_f
+  @the_result = @the_num ** 0.5
+  erb(:square_root_results)
+end
+
 
 
 get ("/") do
