@@ -40,6 +40,21 @@ get ("/random/results") do
   erb(:random_results)
 end
 
+get ("/payment/new") do 
+  erb(:payment_calc)
+end
+
+get ("/payment/results") do
+  @user_apr = params.fetch("user_apr").to_f / 12
+  @user_years = params.fetch("user_years").to_i * 12
+  @user_pv = params.fetch("user_pv").to_f
+  @the_result = (((@user_apr.round(4)) * @user_pv) / (1+(1-(@user_apr.round(4)/100.0)) ** -@user_years)).to_fs(:currency)
+  @apr_out = @user_apr.to_fs(:percentage, {:precision => 4})
+  @pv_out = @user_pv.to_fs(:currency)
+  @years_out = params.fetch("user_years")
+  erb(:payment_results)
+end
+
 
 
 
